@@ -14,6 +14,9 @@ export function SlopProvider({ children }: { children: React.ReactNode }) {
   const [isDark, setIsDark] = useState(false);
 
   const executeSlop = async (action: string, input: string): Promise<string> => {
+    // Start the timer for 5 seconds
+    const delay = new Promise(resolve => setTimeout(resolve, 5000));
+    
     try {
       const res = await fetch("/api/slop", {
         method: "POST",
@@ -22,9 +25,13 @@ export function SlopProvider({ children }: { children: React.ReactNode }) {
       });
       const data = await res.json();
       
+      // Wait for the remainder of the 5 seconds if the API was faster
+      await delay;
+      
       if (data.error) return `[ERROR] ${data.error}`;
       return data.result;
     } catch (err) {
+      await delay;
       return `[FATAL] Neural link severed. Connection timed out.`;
     }
   };

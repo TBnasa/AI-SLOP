@@ -18,7 +18,7 @@ export default function SlopPanel({ slop, loading }: SlopPanelProps) {
       </div>
       <div className="font-mono text-sm min-h-[100px] whitespace-pre-wrap">
         {loading ? (
-          <span className="animate-pulse">Harvesting token entropy... Processing quantum drift...</span>
+          <span className="animate-pulse">Calculating with Neural Overkill... Inference in progress...</span>
         ) : (
           slop || "Awaiting action for unnecessary technical analysis."
         )}
