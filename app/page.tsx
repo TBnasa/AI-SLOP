@@ -8,17 +8,35 @@ export default function Home() {
   const { isDark } = useSlop();
   const { t } = useLang();
 
-  const modules: { titleKey: string; href: string; descKey: string; num: string }[] = [
-    { titleKey: "calc.title", href: "/calc", descKey: "home.calcDesc", num: "01" },
-    { titleKey: "editor.title", href: "/editor", descKey: "home.editorDesc", num: "02" },
-    { titleKey: "resizer.title", href: "/resizer", descKey: "home.resizerDesc", num: "03" },
-    { titleKey: "photon.title", href: "/photon", descKey: "home.photonDesc", num: "04" },
-    { titleKey: "converter.title", href: "/converter", descKey: "home.converterDesc", num: "05" },
-    { titleKey: "counter.title", href: "/counter", descKey: "home.counterDesc", num: "06" },
-    { titleKey: "entropy.title", href: "/entropy", descKey: "home.entropyDesc", num: "07" },
-    { titleKey: "relativity.title", href: "/relativity", descKey: "home.relativityDesc", num: "08" },
-    { titleKey: "jargon.title", href: "/jargon", descKey: "home.jargonDesc", num: "09" },
+  const modules: { titleKey: string; href: string; descKey: string; num: string; color: string }[] = [
+    { titleKey: "calc.title", href: "/calc", descKey: "home.calcDesc", num: "01", color: "red" },
+    { titleKey: "editor.title", href: "/editor", descKey: "home.editorDesc", num: "02", color: "blue" },
+    { titleKey: "resizer.title", href: "/resizer", descKey: "home.resizerDesc", num: "03", color: "purple" },
+    { titleKey: "photon.title", href: "/photon", descKey: "home.photonDesc", num: "04", color: "yellow" },
+    { titleKey: "converter.title", href: "/converter", descKey: "home.converterDesc", num: "05", color: "green" },
+    { titleKey: "counter.title", href: "/counter", descKey: "home.counterDesc", num: "06", color: "orange" },
+    { titleKey: "entropy.title", href: "/entropy", descKey: "home.entropyDesc", num: "07", color: "red" },
+    { titleKey: "relativity.title", href: "/relativity", descKey: "home.relativityDesc", num: "08", color: "blue" },
+    { titleKey: "jargon.title", href: "/jargon", descKey: "home.jargonDesc", num: "09", color: "purple" },
   ];
+
+  const colorMap: Record<string, string> = {
+    red: "text-[#ff0000]",
+    yellow: "text-[#ffcc00]",
+    green: "text-[#00cc00]",
+    blue: "text-[#0066ff]",
+    orange: "text-[#ff6600]",
+    purple: "text-[#9900ff]",
+  };
+
+  const bgMap: Record<string, string> = {
+    red: "bg-[#ff0000]",
+    yellow: "bg-[#ffcc00]",
+    green: "bg-[#00cc00]",
+    blue: "bg-[#0066ff]",
+    orange: "bg-[#ff6600]",
+    purple: "bg-[#9900ff]",
+  };
 
   return (
     <div className="min-h-full">
@@ -29,7 +47,7 @@ export default function Home() {
       </div>
 
       <div className="max-w-7xl mx-auto px-6 py-8">
-        {/* Module grid - brutalist asymmetric */}
+        {/* Module grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border-[3px] border-black">
           {modules.map((mod, i) => (
             <Link
@@ -41,23 +59,25 @@ export default function Home() {
                 i === modules.length - 1 ? "md:border-r-0" : ""
               }`}
             >
-              {/* Module number */}
-              <div className="font-display text-[4rem] leading-none text-gray-200 absolute top-2 right-4 select-none">
+              {/* Colored number */}
+              <div className={`font-display text-[4rem] leading-none ${colorMap[mod.color]} opacity-30 absolute top-2 right-4 select-none`}>
                 {mod.num}
               </div>
 
-              {/* Content */}
+              {/* Color accent bar */}
+              <div className={`w-full h-[3px] ${bgMap[mod.color]} mb-3 opacity-60`} />
+
               <div className="relative z-10">
                 <div className="font-mono text-[9px] uppercase tracking-[0.2em] mb-2 text-gray-400">
                   MODULE_{mod.num}
                 </div>
-                <h3 className="brutal-heading text-3xl mb-2 group-hover:text-red-600 transition-colors">
+                <h3 className="brutal-heading text-3xl mb-2 group-hover:translate-x-1 transition-transform">
                   {t(mod.titleKey)}
                 </h3>
                 <p className="font-mono text-[11px] text-gray-600 leading-relaxed mb-4">
                   {t(mod.descKey)}
                 </p>
-                <div className="font-mono text-[10px] uppercase tracking-widest border-t border-black pt-2 inline-block group-hover:bg-black group-hover:text-white transition-all">
+                <div className={`font-mono text-[10px] uppercase tracking-widest border-t-2 border-black pt-2 inline-block group-hover:${bgMap[mod.color]} group-hover:text-white transition-all`}>
                   {t("home.open")}
                 </div>
               </div>
@@ -76,14 +96,26 @@ export default function Home() {
                 ))}
               </div>
             </div>
-            {/* Diagonal stripe accent */}
-            <div className="absolute top-0 right-0 w-16 h-full stripe-bg opacity-20" />
+            {/* Color diagonal stripes */}
+            <div className="absolute top-0 right-0 w-20 h-full opacity-30">
+              <div className="absolute inset-0 bg-[#ff0000] skew-x-12 translate-x-8" />
+              <div className="absolute inset-0 bg-[#ffcc00] skew-x-12 translate-x-16" />
+              <div className="absolute inset-0 bg-[#00cc00] skew-x-12 translate-x-24" />
+            </div>
           </div>
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-0 border-[3px] border-black border-t-0 bg-black text-white px-6 py-3 font-mono text-[9px] uppercase tracking-widest flex justify-between">
+        <div className="mt-0 border-[3px] border-black border-t-0 bg-black text-white px-6 py-3 font-mono text-[9px] uppercase tracking-widest flex justify-between items-center">
           <span>AI SLOPS v0.1.0</span>
+          <div className="flex gap-2">
+            <div className="w-2 h-2 bg-[#ff0000]" />
+            <div className="w-2 h-2 bg-[#ffcc00]" />
+            <div className="w-2 h-2 bg-[#00cc00]" />
+            <div className="w-2 h-2 bg-[#0066ff]" />
+            <div className="w-2 h-2 bg-[#ff6600]" />
+            <div className="w-2 h-2 bg-[#9900ff]" />
+          </div>
           <span>ALL OPERATIONS GUARANTEED TO BE SLOW</span>
         </div>
       </div>

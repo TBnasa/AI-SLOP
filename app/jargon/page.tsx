@@ -15,8 +15,7 @@ export default function JargonPage() {
   const handleGenerate = async () => {
     setLoading(true);
     const result = await executeSlop(t("jargon.title"), t("jargon.prompt"));
-    setSlop(result);
-    setLoading(false);
+    setSlop(result); setLoading(false);
   };
 
   return (
@@ -24,26 +23,18 @@ export default function JargonPage() {
       <div className="border-b-[3px] border-black bg-gray-100 px-6 py-3 font-mono text-[10px] uppercase tracking-widest">
         <Link href="/" className="hover:underline">root@ai-slops:~$</Link> cd ./jargon
       </div>
-
       <div className="max-w-7xl mx-auto px-6 py-8">
         <div className="flex flex-col lg:flex-row gap-8 items-start">
           <div className="border-[5px] border-black bg-white w-full lg:w-[600px] brutal-shadow-lg">
-            <div className="border-b-[3px] border-black px-4 py-2 bg-black text-white font-mono text-[10px] uppercase">
+            <div className="border-b-[3px] border-black px-4 py-2 bg-[#9900ff] text-white font-mono text-[10px] uppercase">
               JARGON.EXE
             </div>
             <div className="p-6 text-center">
               <h2 className="brutal-heading text-4xl mb-6">{t("jargon.title")}</h2>
-
-              <div className="border-[5px] border-black p-10 mb-6 bg-black text-white font-display text-2xl italic">
-                {t("jargon.display")}
-              </div>
-
-              <button onClick={handleGenerate} className="brutal-btn w-full">
-                {t("jargon.button")}
-              </button>
+              <div className="border-[5px] border-black p-10 mb-6 bg-black text-white font-display text-2xl italic">{t("jargon.display")}</div>
+              <button onClick={handleGenerate} className="brutal-btn brutal-btn-purple w-full">{t("jargon.button")}</button>
             </div>
           </div>
-
           <SlopPanel slop={slop} loading={loading} />
         </div>
       </div>

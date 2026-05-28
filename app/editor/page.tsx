@@ -17,8 +17,7 @@ export default function EditorPage() {
     if (!text) return;
     setLoading(true);
     const result = await executeSlop(t("editor.title"), t("editor.prompt", text));
-    setSlop(result);
-    setLoading(false);
+    setSlop(result); setLoading(false);
   };
 
   return (
@@ -26,27 +25,18 @@ export default function EditorPage() {
       <div className="border-b-[3px] border-black bg-gray-100 px-6 py-3 font-mono text-[10px] uppercase tracking-widest">
         <Link href="/" className="hover:underline">root@ai-slops:~$</Link> cd ./editor
       </div>
-
       <div className="max-w-7xl mx-auto px-6 py-8">
         <div className="flex flex-col lg:flex-row gap-8 items-start">
           <div className="border-[5px] border-black bg-white w-full lg:w-[600px] brutal-shadow-lg">
-            <div className="border-b-[3px] border-black px-4 py-2 bg-black text-white font-mono text-[10px] uppercase">
+            <div className="border-b-[3px] border-black px-4 py-2 bg-[#0066ff] text-white font-mono text-[10px] uppercase">
               EDITOR.EXE
             </div>
             <div className="p-6">
               <h2 className="brutal-heading text-4xl mb-6">{t("editor.title")}</h2>
-              <textarea
-                value={text}
-                onChange={(e) => setText(e.target.value)}
-                className="brutal-input w-full h-56 resize-none text-sm"
-                placeholder={t("editor.placeholder")}
-              />
-              <button onClick={handleAnalyze} className="brutal-btn w-full mt-5">
-                {t("editor.button")}
-              </button>
+              <textarea value={text} onChange={(e) => setText(e.target.value)} className="brutal-input w-full h-56 resize-none text-sm" placeholder={t("editor.placeholder")} />
+              <button onClick={handleAnalyze} className="brutal-btn brutal-btn-blue w-full mt-5">{t("editor.button")}</button>
             </div>
           </div>
-
           <SlopPanel slop={slop} loading={loading} />
         </div>
       </div>
