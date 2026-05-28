@@ -2,11 +2,13 @@
 
 import { useState } from "react";
 import { useSlop } from "@/context/SlopContext";
+import { useLang } from "@/context/LanguageContext";
 import Link from "next/link";
 import SlopPanel from "@/components/SlopPanel";
 
 export default function CalcPage() {
   const { executeSlop, isDark } = useSlop();
+  const { t } = useLang();
   const [display, setDisplay] = useState("0");
   const [firstNumber, setFirstNumber] = useState<number | null>(null);
   const [operator, setOperator] = useState<string | null>(null);
@@ -57,7 +59,7 @@ export default function CalcPage() {
       setWaitingForSecondNumber(false);
 
       setLoading(true);
-      const slopText = await executeSlop("Legacy Calculation", `The user calculated "${fullOp}" and got "${result}". Explain the atomic weight of these numbers and the quantum latency of this operation.`);
+      const slopText = await executeSlop(t("calc.title"), t("calc.prompt", fullOp, result));
       setSlop(slopText);
       setLoading(false);
     }
@@ -77,7 +79,7 @@ export default function CalcPage() {
     <div className={`min-h-full p-8 ${isDark ? 'bg-zinc-950' : 'bg-[#f4f4f0]'} flex flex-col items-center gap-8`}>
       <div className="w-full max-w-7xl">
         <Link href="/" className="inline-block border-8 border-black p-4 bg-[#ffea00] text-black font-black uppercase hover:bg-black hover:text-white transition-colors shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] cursor-pointer">
-          ← BACK TO DASHBOARD
+          {t("back")}
         </Link>
       </div>
 
@@ -88,7 +90,7 @@ export default function CalcPage() {
             {display}
           </div>
           <div className="grid grid-cols-4 gap-4">
-            <button onClick={clear} className={`${btnClass} col-span-2 bg-red-500 text-white`}>CLEAR</button>
+            <button onClick={clear} className={`${btnClass} col-span-2 bg-red-500 text-white`}>{t("calc.clear")}</button>
             <button onClick={() => handleOperator("/")} className={btnClass}>/</button>
             <button onClick={() => handleOperator("*")} className={btnClass}>*</button>
             
