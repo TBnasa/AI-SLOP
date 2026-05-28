@@ -7,7 +7,7 @@ import Link from "next/link";
 import SlopPanel from "@/components/SlopPanel";
 
 export default function JargonPage() {
-  const { executeSlop, isDark } = useSlop();
+  const { executeSlop } = useSlop();
   const { t } = useLang();
   const [slop, setSlop] = useState("");
   const [loading, setLoading] = useState(false);
@@ -20,28 +20,25 @@ export default function JargonPage() {
   };
 
   return (
-    <div className="min-h-full p-6 md:p-10">
-      <div className="max-w-7xl mx-auto">
-        <Link href="/" className="inline-flex items-center gap-2 font-mono text-xs text-crt-text-dim hover:text-crt-green transition-colors mb-8 group">
-          <span className="text-crt-green opacity-50 group-hover:opacity-100 transition-opacity">$</span>
-          <span>{t("back")}</span>
-        </Link>
+    <div className="min-h-full">
+      <div className="border-b-[3px] border-black bg-gray-100 px-6 py-3 font-mono text-[10px] uppercase tracking-widest">
+        <Link href="/" className="hover:underline">root@ai-slops:~$</Link> cd ./jargon
+      </div>
 
+      <div className="max-w-7xl mx-auto px-6 py-8">
         <div className="flex flex-col lg:flex-row gap-8 items-start">
-          <div className="terminal-card w-full lg:w-[600px]">
-            <div className="terminal-card-content p-6 text-center">
-              <h2 className="text-3xl font-display text-crt-green glow-green mb-6">
-                {t("jargon.title")}
-              </h2>
+          <div className="border-[5px] border-black bg-white w-full lg:w-[600px] brutal-shadow-lg">
+            <div className="border-b-[3px] border-black px-4 py-2 bg-black text-white font-mono text-[10px] uppercase">
+              JARGON.EXE
+            </div>
+            <div className="p-6 text-center">
+              <h2 className="brutal-heading text-4xl mb-6">{t("jargon.title")}</h2>
 
-              <div className="border border-crt-border p-10 mb-6 bg-crt-bg font-display text-xl text-crt-amber glow-amber italic">
+              <div className="border-[5px] border-black p-10 mb-6 bg-black text-white font-display text-2xl italic">
                 {t("jargon.display")}
               </div>
 
-              <button
-                onClick={handleGenerate}
-                className="crt-btn w-full py-3 font-mono text-sm"
-              >
+              <button onClick={handleGenerate} className="brutal-btn w-full">
                 {t("jargon.button")}
               </button>
             </div>

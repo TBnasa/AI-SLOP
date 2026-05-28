@@ -13,56 +13,49 @@ export default function SlopPanel({ slop, loading }: SlopPanelProps) {
   const { t } = useLang();
 
   return (
-    <div className="mt-8 terminal-card max-w-2xl w-full">
-      <div className="terminal-card-content p-6">
-        {/* Panel header */}
-        <div className="flex items-center gap-3 border-b border-crt-border pb-4 mb-4">
-          <div className="text-crt-green font-display text-lg glow-green">
-            {t("slopPanel.title")}
+    <div className="mt-8 border-[5px] border-black bg-white max-w-2xl w-full brutal-shadow-lg">
+      {/* Panel header */}
+      <div className="flex items-center justify-between border-b-[3px] border-black px-5 py-3 bg-black text-white">
+        <span className="font-display text-2xl uppercase tracking-wider">
+          {t("slopPanel.title")}
+        </span>
+        {loading && (
+          <span className="font-mono text-[10px] uppercase bg-white text-black px-2 py-1 animate-pulse">
+            PROCESSING
+          </span>
+        )}
+      </div>
+
+      {/* Content */}
+      <div className="p-5 min-h-[120px]">
+        {loading ? (
+          <div className="space-y-3">
+            <div className="font-mono text-sm text-black animate-pulse">
+              {t("slopPanel.loading")}
+            </div>
+            <div className="flex gap-1">
+              <div className="w-3 h-3 bg-black animate-bounce" style={{ animationDelay: "0ms" }} />
+              <div className="w-3 h-3 bg-black animate-bounce" style={{ animationDelay: "150ms" }} />
+              <div className="w-3 h-3 bg-black animate-bounce" style={{ animationDelay: "300ms" }} />
+            </div>
           </div>
-          {loading && (
-            <div className="flex items-center gap-2 text-crt-amber font-mono text-xs glow-amber">
-              <div className="w-2 h-2 rounded-full bg-crt-amber animate-pulse" />
-              PROCESSING
-            </div>
-          )}
-        </div>
-
-        {/* Content area */}
-        <div className="font-mono text-sm min-h-[100px] whitespace-pre-wrap leading-relaxed">
-          {loading ? (
-            <div className="space-y-2">
-              <div className="text-crt-green glow-green animate-pulse">
-                {t("slopPanel.loading")}
-              </div>
-              <div className="flex gap-1">
-                <span className="text-crt-amber glow-amber">[</span>
-                <div className="flex gap-1 items-center">
-                  <div className="w-1.5 h-4 bg-crt-green slow-spinner" style={{ animationDuration: "2s" }} />
-                  <div className="w-1.5 h-4 bg-crt-green slow-spinner" style={{ animationDuration: "3s" }} />
-                  <div className="w-1.5 h-4 bg-crt-green slow-spinner" style={{ animationDuration: "4s" }} />
-                </div>
-                <span className="text-crt-amber glow-amber">]</span>
-              </div>
-            </div>
-          ) : (
-            <div className="text-crt-text">
-              {slop || (
-                <span className="text-crt-text-dim italic">
-                  {t("slopPanel.default")}
-                </span>
-              )}
-            </div>
-          )}
-        </div>
-
-        {/* Footer */}
-        {!loading && slop && (
-          <div className="mt-4 pt-3 border-t border-crt-border text-[10px] text-crt-text-dim font-mono uppercase tracking-widest">
-            {t("slopPanel.footer")}
+        ) : (
+          <div className="font-mono text-sm leading-relaxed whitespace-pre-wrap text-black">
+            {slop || (
+              <span className="text-gray-400 italic">
+                {t("slopPanel.default")}
+              </span>
+            )}
           </div>
         )}
       </div>
+
+      {/* Footer */}
+      {!loading && slop && (
+        <div className="border-t-[3px] border-black px-5 py-2 bg-gray-100 font-mono text-[9px] uppercase tracking-widest">
+          {t("slopPanel.footer")}
+        </div>
+      )}
     </div>
   );
 }

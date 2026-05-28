@@ -7,7 +7,7 @@ import Link from "next/link";
 import SlopPanel from "@/components/SlopPanel";
 
 export default function ResizerPage() {
-  const { executeSlop, isDark } = useSlop();
+  const { executeSlop } = useSlop();
   const { t } = useLang();
   const [fileName, setFileName] = useState("");
   const [slop, setSlop] = useState("");
@@ -22,24 +22,23 @@ export default function ResizerPage() {
   };
 
   return (
-    <div className="min-h-full p-6 md:p-10">
-      <div className="max-w-7xl mx-auto">
-        <Link href="/" className="inline-flex items-center gap-2 font-mono text-xs text-crt-text-dim hover:text-crt-green transition-colors mb-8 group">
-          <span className="text-crt-green opacity-50 group-hover:opacity-100 transition-opacity">$</span>
-          <span>{t("back")}</span>
-        </Link>
+    <div className="min-h-full">
+      <div className="border-b-[3px] border-black bg-gray-100 px-6 py-3 font-mono text-[10px] uppercase tracking-widest">
+        <Link href="/" className="hover:underline">root@ai-slops:~$</Link> cd ./resizer
+      </div>
 
+      <div className="max-w-7xl mx-auto px-6 py-8">
         <div className="flex flex-col lg:flex-row gap-8 items-start">
-          <div className="terminal-card w-full lg:w-[600px]">
-            <div className="terminal-card-content p-6">
-              <h2 className="text-3xl font-display text-crt-green glow-green mb-6">
-                {t("resizer.title")}
-              </h2>
+          <div className="border-[5px] border-black bg-white w-full lg:w-[600px] brutal-shadow-lg">
+            <div className="border-b-[3px] border-black px-4 py-2 bg-black text-white font-mono text-[10px] uppercase">
+              RESIZER.EXE
+            </div>
+            <div className="p-6">
+              <h2 className="brutal-heading text-4xl mb-6">{t("resizer.title")}</h2>
 
-              {/* Preview area */}
-              <div className="border border-crt-border border-dashed p-10 mb-5 flex flex-col items-center justify-center gap-3 bg-crt-bg/50">
-                <div className="text-crt-text-dim font-mono text-2xl">?</div>
-                <p className="font-mono text-xs text-crt-text-dim uppercase">
+              <div className="border-[3px] border-black border-dashed p-12 mb-5 flex flex-col items-center justify-center gap-3 bg-gray-50">
+                <div className="font-display text-5xl text-gray-300">?</div>
+                <p className="font-mono text-[10px] uppercase tracking-widest text-gray-400">
                   {t("resizer.status")}
                 </p>
               </div>
@@ -48,13 +47,10 @@ export default function ResizerPage() {
                 type="text"
                 value={fileName}
                 onChange={(e) => setFileName(e.target.value)}
-                className="crt-input w-full p-4 font-mono text-sm"
+                className="brutal-input w-full text-sm"
                 placeholder={t("resizer.placeholder")}
               />
-              <button
-                onClick={handleResize}
-                className="crt-btn w-full py-3 mt-5 font-mono text-sm"
-              >
+              <button onClick={handleResize} className="brutal-btn w-full mt-5">
                 {t("resizer.button")}
               </button>
             </div>

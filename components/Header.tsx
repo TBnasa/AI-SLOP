@@ -9,34 +9,46 @@ export default function Header() {
   const { locale, setLocale, t } = useLang();
 
   return (
-    <header className="relative z-10 border-b border-crt-border bg-crt-surface/80 backdrop-blur-sm">
-      <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
-        <Link href="/" className="group flex items-center gap-4 cursor-pointer">
-          {/* Terminal prompt icon */}
-          <div className="text-crt-green text-3xl font-display glow-green group-hover:opacity-100 opacity-70 transition-opacity">
-            &gt;_
-          </div>
-          <div>
-            <h1 className="text-4xl md:text-5xl font-display text-crt-green glow-green leading-none tracking-wider">
-              AI SLOPS
-            </h1>
-            <p className="font-mono text-xs text-crt-text-dim mt-1 tracking-widest uppercase">
-              {t("header.tagline")}
-            </p>
+    <header className="border-b-[5px] border-black bg-white relative">
+      {/* Marquee ticker */}
+      <div className="bg-black text-white overflow-hidden py-1 border-b-[3px] border-black">
+        <div className="marquee whitespace-nowrap font-mono text-[10px] uppercase tracking-widest">
+          <span className="inline-block px-8">SLOW</span>
+          <span className="inline-block px-8">USELESS</span>
+          <span className="inline-block px-8">BROKEN</span>
+          <span className="inline-block px-8">AI POWERED</span>
+          <span className="inline-block px-8">10 SEC DELAY</span>
+          <span className="inline-block px-8">NO REFUNDS</span>
+          <span className="inline-block px-8">SLOW</span>
+          <span className="inline-block px-8">USELESS</span>
+          <span className="inline-block px-8">BROKEN</span>
+          <span className="inline-block px-8">AI POWERED</span>
+          <span className="inline-block px-8">10 SEC DELAY</span>
+          <span className="inline-block px-8">NO REFUNDS</span>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 py-6 flex items-end justify-between">
+        <Link href="/" className="group cursor-pointer">
+          <h1 className="brutal-heading text-[5rem] md:text-[7rem] leading-[0.85] tracking-tighter">
+            AI<br />
+            <span className="text-[6rem] md:text-[9rem]">SLOPS</span>
+          </h1>
+          <div className="mt-2 font-mono text-[10px] uppercase tracking-[0.2em] border-t-2 border-black pt-2 inline-block">
+            {t("header.tagline")}
           </div>
         </Link>
 
-        <div className="flex items-center gap-4">
-          {/* Status indicator */}
-          <div className="hidden md:flex items-center gap-2 text-crt-text-dim font-mono text-xs">
-            <div className="w-2 h-2 rounded-full bg-crt-green animate-pulse" />
-            <span>SYSTEM: SLOW</span>
+        <div className="flex items-end gap-4 pb-3">
+          {/* Status block */}
+          <div className="hidden md:block border-[3px] border-black px-3 py-2 bg-black text-white font-mono text-[10px] uppercase">
+            STATUS: SLOW
           </div>
 
-          {/* Language toggle */}
+          {/* Lang toggle */}
           <button
             onClick={() => setLocale(locale === "en" ? "tr" : "en")}
-            className="crt-btn px-3 py-1.5 text-xs font-mono"
+            className="brutal-btn px-4 py-2 text-sm"
           >
             {locale === "en" ? "TR" : "EN"}
           </button>

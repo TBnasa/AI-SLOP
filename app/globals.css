@@ -1,322 +1,234 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-ibm-plex), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-vt323), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  --font-display: var(--font-vt323), monospace;
-
-  --color-crt-bg: #050505;
-  --color-crt-surface: #0a0a0a;
-  --color-crt-surface-2: #111111;
-  --color-crt-green: #33ff33;
-  --color-crt-green-dim: #1a8a1a;
-  --color-crt-amber: #ffaa00;
-  --color-crt-amber-dim: #8a5a00;
-  --color-crt-blue: #00aaff;
-  --color-crt-red: #ff3333;
-  --color-crt-border: #1a1a1a;
-  --color-crt-border-bright: #2a2a2a;
-  --color-crt-text: #b0b0b0;
-  --color-crt-text-dim: #555555;
+  --font-sans: var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Courier New", monospace;
+  --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Courier New", monospace;
+  --font-display: var(--font-bebas), "Impact", "Arial Black", sans-serif;
 }
-
-/* ==================== BASE ==================== */
 
 * {
   box-sizing: border-box;
+  border-radius: 0 !important;
 }
 
 body {
   margin: 0;
   padding: 0;
-  background: var(--color-crt-bg);
-  color: var(--color-crt-text);
-  overflow-x: hidden;
+  background: #ffffff;
+  color: #000000;
+  -webkit-font-smoothing: antialiased;
+  cursor: default;
 }
 
 ::selection {
-  background: var(--color-crt-green);
-  color: var(--color-crt-bg);
+  background: #ff0000;
+  color: #ffffff;
 }
 
-/* ==================== CRT SCAN LINES ==================== */
+/* ==================== BRUTALIST FOUNDATIONS ==================== */
 
-.crt-overlay {
-  pointer-events: none;
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  background: repeating-linear-gradient(
-    0deg,
-    rgba(0, 0, 0, 0.15) 0px,
-    rgba(0, 0, 0, 0.15) 1px,
-    transparent 1px,
-    transparent 3px
-  );
-  animation: flicker 0.15s infinite;
+.brutal-border {
+  border: 3px solid #000000;
 }
 
-@keyframes flicker {
-  0% { opacity: 0.97; }
-  50% { opacity: 1; }
-  100% { opacity: 0.98; }
+.brutal-border-thick {
+  border: 5px solid #000000;
 }
 
-/* ==================== SCREEN GLOW ==================== */
-
-.screen-glow {
-  position: relative;
+.brutal-shadow {
+  box-shadow: 6px 6px 0px #000000;
 }
 
-.screen-glow::before {
-  content: "";
-  position: absolute;
-  inset: -2px;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(51, 255, 51, 0.03) 0%,
-    transparent 70%
-  );
-  pointer-events: none;
-  z-index: 0;
+.brutal-shadow-lg {
+  box-shadow: 10px 10px 0px #000000;
 }
 
-/* ==================== PHOSPHOR TEXT GLOW ==================== */
-
-.glow-green {
-  text-shadow:
-    0 0 4px rgba(51, 255, 51, 0.6),
-    0 0 12px rgba(51, 255, 51, 0.3),
-    0 0 24px rgba(51, 255, 51, 0.1);
+.brutal-shadow-hover {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.glow-amber {
-  text-shadow:
-    0 0 4px rgba(255, 170, 0, 0.6),
-    0 0 12px rgba(255, 170, 0, 0.3),
-    0 0 24px rgba(255, 170, 0, 0.1);
+.brutal-shadow-hover:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 9px 9px 0px #000000;
 }
 
-.glow-blue {
-  text-shadow:
-    0 0 4px rgba(0, 170, 255, 0.6),
-    0 0 12px rgba(0, 170, 255, 0.3);
-}
+/* ==================== TYPOGRAPHY ==================== */
 
-.glow-red {
-  text-shadow:
-    0 0 4px rgba(255, 51, 51, 0.6),
-    0 0 12px rgba(255, 51, 51, 0.3);
-}
-
-/* ==================== TERMINAL CARD ==================== */
-
-.terminal-card {
-  background: var(--color-crt-surface);
-  border: 1px solid var(--color-crt-border);
-  position: relative;
-  overflow: hidden;
-  transition: border-color 0.4s ease, box-shadow 0.4s ease;
-}
-
-.terminal-card:hover {
-  border-color: var(--color-crt-green-dim);
-  box-shadow:
-    0 0 15px rgba(51, 255, 51, 0.05),
-    inset 0 0 30px rgba(51, 255, 51, 0.02);
-}
-
-.terminal-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 28px;
-  background: var(--color-crt-surface-2);
-  border-bottom: 1px solid var(--color-crt-border);
-  z-index: 1;
-}
-
-/* Title bar dots */
-.terminal-card::after {
-  content: "";
-  position: absolute;
-  top: 9px;
-  left: 12px;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--color-crt-red);
-  box-shadow:
-    14px 0 0 var(--color-crt-amber),
-    28px 0 0 var(--color-crt-green);
-  z-index: 2;
-  opacity: 0.7;
-}
-
-.terminal-card-content {
-  padding-top: 40px;
-}
-
-/* ==================== CURSOR BLINK ==================== */
-
-.cursor-blink::after {
-  content: "_";
-  animation: blink 1.2s step-end infinite;
-  color: var(--color-crt-green);
-}
-
-@keyframes blink {
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0; }
-}
-
-/* ==================== SLOW TYPEWRITER ==================== */
-
-@keyframes typewriter {
-  from { width: 0; }
-  to { width: 100%; }
-}
-
-.typewriter {
-  overflow: hidden;
-  white-space: nowrap;
-  animation: typewriter 3s steps(40, end);
-}
-
-/* ==================== SLOW FADE IN ==================== */
-
-@keyframes slow-fade-in {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.slow-fade {
-  animation: slow-fade-in 1.5s ease-out forwards;
-}
-
-/* Staggered delays for card grid */
-.stagger-1 { animation-delay: 0.1s; opacity: 0; }
-.stagger-2 { animation-delay: 0.2s; opacity: 0; }
-.stagger-3 { animation-delay: 0.3s; opacity: 0; }
-.stagger-4 { animation-delay: 0.4s; opacity: 0; }
-.stagger-5 { animation-delay: 0.5s; opacity: 0; }
-.stagger-6 { animation-delay: 0.6s; opacity: 0; }
-.stagger-7 { animation-delay: 0.7s; opacity: 0; }
-.stagger-8 { animation-delay: 0.8s; opacity: 0; }
-.stagger-9 { animation-delay: 0.9s; opacity: 0; }
-
-/* ==================== LOADING SPINNER ==================== */
-
-@keyframes slow-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-.slow-spinner {
-  animation: slow-spin 4s linear infinite;
-}
-
-/* ==================== NOISE TEXTURE ==================== */
-
-.noise-bg {
-  position: relative;
-}
-
-.noise-bg::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  opacity: 0.03;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* ==================== GRADIENT MESH BG ==================== */
-
-.mesh-bg {
-  background:
-    radial-gradient(ellipse at 10% 20%, rgba(51, 255, 51, 0.04) 0%, transparent 50%),
-    radial-gradient(ellipse at 90% 80%, rgba(0, 170, 255, 0.03) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 50%, rgba(255, 170, 0, 0.02) 0%, transparent 60%),
-    var(--color-crt-bg);
-}
-
-/* ==================== INPUT STYLES ==================== */
-
-.crt-input {
-  background: var(--color-crt-surface);
-  border: 1px solid var(--color-crt-border);
-  color: var(--color-crt-green);
-  font-family: var(--font-mono);
-  caret-color: var(--color-crt-green);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.crt-input:focus {
-  outline: none;
-  border-color: var(--color-crt-green-dim);
-  box-shadow: 0 0 10px rgba(51, 255, 51, 0.1);
-}
-
-.crt-input::placeholder {
-  color: var(--color-crt-text-dim);
-}
-
-/* ==================== BUTTON STYLES ==================== */
-
-.crt-btn {
-  background: transparent;
-  border: 1px solid var(--color-crt-green-dim);
-  color: var(--color-crt-green);
-  font-family: var(--font-mono);
+.brutal-heading {
+  font-family: var(--font-display);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: -0.02em;
+  line-height: 0.9;
+  font-weight: 400;
+}
+
+.brutal-mono {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ==================== BUTTONS ==================== */
+
+.brutal-btn {
+  background: #000000;
+  color: #ffffff;
+  border: 3px solid #000000;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 1.1rem;
+  padding: 0.75rem 1.5rem;
   cursor: pointer;
+  transition: all 0.1s ease;
   position: relative;
-  overflow: hidden;
-  transition: all 0.3s ease;
 }
 
-.crt-btn::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: var(--color-crt-green);
-  opacity: 0;
-  transition: opacity 0.3s ease;
+.brutal-btn:hover {
+  background: #ffffff;
+  color: #000000;
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0px #000000;
 }
 
-.crt-btn:hover {
-  border-color: var(--color-crt-green);
-  text-shadow: 0 0 8px rgba(51, 255, 51, 0.5);
+.brutal-btn:active {
+  transform: translate(0, 0);
+  box-shadow: none;
 }
 
-.crt-btn:hover::before {
-  opacity: 0.05;
+.brutal-btn-red {
+  background: #ff0000;
+  color: #ffffff;
+  border-color: #000000;
 }
 
-.crt-btn:active {
-  transform: scale(0.98);
+.brutal-btn-red:hover {
+  background: #000000;
+  color: #ff0000;
+}
+
+/* ==================== INPUTS ==================== */
+
+.brutal-input {
+  background: #ffffff;
+  border: 3px solid #000000;
+  color: #000000;
+  font-family: var(--font-mono);
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  outline: none;
+  transition: all 0.1s ease;
+}
+
+.brutal-input:focus {
+  background: #000000;
+  color: #ffffff;
+  box-shadow: 4px 4px 0px #ff0000;
+}
+
+.brutal-input::placeholder {
+  color: #999999;
+}
+
+/* ==================== ANIMATIONS ==================== */
+
+@keyframes brutal-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes brutal-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes brutal-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+@keyframes brutal-stripe {
+  0% { background-position: 0 0; }
+  100% { background-position: 40px 0; }
+}
+
+.brutal-fade {
+  animation: brutal-fade-in 0.4s ease-out forwards;
+}
+
+.brutal-slide {
+  animation: brutal-slide-in 0.3s ease-out forwards;
+}
+
+.stagger-1 { animation-delay: 0.05s; opacity: 0; }
+.stagger-2 { animation-delay: 0.1s; opacity: 0; }
+.stagger-3 { animation-delay: 0.15s; opacity: 0; }
+.stagger-4 { animation-delay: 0.2s; opacity: 0; }
+.stagger-5 { animation-delay: 0.25s; opacity: 0; }
+.stagger-6 { animation-delay: 0.3s; opacity: 0; }
+.stagger-7 { animation-delay: 0.35s; opacity: 0; }
+.stagger-8 { animation-delay: 0.4s; opacity: 0; }
+.stagger-9 { animation-delay: 0.45s; opacity: 0; }
+
+/* ==================== DIAGONAL STRIPE PATTERN ==================== */
+
+.stripe-bg {
+  background-image: repeating-linear-gradient(
+    45deg,
+    #000000 0px,
+    #000000 1px,
+    transparent 1px,
+    transparent 8px
+  );
+  background-size: 8px 8px;
 }
 
 /* ==================== SCROLLBAR ==================== */
 
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-crt-bg);
+  background: #ffffff;
+  border-left: 3px solid #000000;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-crt-border-bright);
-  border-radius: 3px;
+  background: #000000;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-crt-green-dim);
+/* ==================== MARQUEE ==================== */
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee {
+  animation: marquee 20s linear infinite;
+}
+
+/* ==================== NOISE ==================== */
+
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.015;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
