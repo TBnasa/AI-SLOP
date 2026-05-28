@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Inter, Space_Mono } from "next/font/google";
+import { VT323, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { SlopProvider } from "@/context/SlopContext";
 import Header from "@/components/Header";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const spaceMono = Space_Mono({ weight: ["400", "700"], subsets: ["latin"], variable: "--font-space-mono" });
+const vt323 = VT323({ weight: "400", subsets: ["latin"], variable: "--font-vt323" });
+const ibmPlex = IBM_Plex_Mono({ weight: ["400", "600", "700"], subsets: ["latin"], variable: "--font-ibm-plex" });
 
 export const metadata: Metadata = {
   title: "AI SLOPS - everything is very slow",
@@ -20,12 +20,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${spaceMono.variable} font-sans antialiased`}>
+      <body className={`${vt323.variable} ${ibmPlex.variable} font-sans antialiased`}>
+        <div className="crt-overlay" />
         <LanguageProvider>
           <SlopProvider>
-            <div className="min-h-screen flex flex-col">
+            <div className="min-h-screen flex flex-col mesh-bg noise-bg screen-glow">
               <Header />
-              <main className="flex-grow">
+              <main className="flex-grow relative z-10">
                 {children}
               </main>
             </div>

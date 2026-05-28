@@ -8,44 +8,84 @@ export default function Home() {
   const { isDark } = useSlop();
   const { t } = useLang();
 
-  const cardClass = `border-8 border-black p-6 flex flex-col gap-4 shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] transition-transform hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[14px_14px_0px_0px_rgba(0,0,0,1)] cursor-pointer ${isDark ? 'bg-zinc-800 border-white shadow-[10px_10px_0px_0px_rgba(255,255,255,1)] hover:shadow-[14px_14px_0px_0px_rgba(255,255,255,1)] text-white' : 'bg-white text-black'}`;
-
-  const containerClass = `min-h-full font-sans p-8 md:p-12 transition-colors duration-500 ${isDark ? 'bg-zinc-950' : 'bg-[#f4f4f0]'}`;
-
-  const modules: { titleKey: string; href: string; descKey: string }[] = [
-    { titleKey: "calc.title", href: "/calc", descKey: "home.calcDesc" },
-    { titleKey: "editor.title", href: "/editor", descKey: "home.editorDesc" },
-    { titleKey: "resizer.title", href: "/resizer", descKey: "home.resizerDesc" },
-    { titleKey: "photon.title", href: "/photon", descKey: "home.photonDesc" },
-    { titleKey: "converter.title", href: "/converter", descKey: "home.converterDesc" },
-    { titleKey: "counter.title", href: "/counter", descKey: "home.counterDesc" },
-    { titleKey: "entropy.title", href: "/entropy", descKey: "home.entropyDesc" },
-    { titleKey: "relativity.title", href: "/relativity", descKey: "home.relativityDesc" },
-    { titleKey: "jargon.title", href: "/jargon", descKey: "home.jargonDesc" },
+  const modules: { titleKey: string; href: string; descKey: string; icon: string }[] = [
+    { titleKey: "calc.title", href: "/calc", descKey: "home.calcDesc", icon: "01" },
+    { titleKey: "editor.title", href: "/editor", descKey: "home.editorDesc", icon: "02" },
+    { titleKey: "resizer.title", href: "/resizer", descKey: "home.resizerDesc", icon: "03" },
+    { titleKey: "photon.title", href: "/photon", descKey: "home.photonDesc", icon: "04" },
+    { titleKey: "converter.title", href: "/converter", descKey: "home.converterDesc", icon: "05" },
+    { titleKey: "counter.title", href: "/counter", descKey: "home.counterDesc", icon: "06" },
+    { titleKey: "entropy.title", href: "/entropy", descKey: "home.entropyDesc", icon: "07" },
+    { titleKey: "relativity.title", href: "/relativity", descKey: "home.relativityDesc", icon: "08" },
+    { titleKey: "jargon.title", href: "/jargon", descKey: "home.jargonDesc", icon: "09" },
   ];
 
   return (
-    <div className={containerClass}>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-7xl mx-auto">
-        
-        {modules.map((mod) => (
-          <Link key={mod.href} href={mod.href} className={cardClass}>
-            <h3 className="text-2xl font-black uppercase tracking-tighter">{t(mod.titleKey)}</h3>
-            <p className="font-mono text-sm">{t(mod.descKey)}</p>
-            <div className="mt-auto flex justify-between items-center">
-               <span className="text-xs font-bold underline bg-black text-white px-2 py-1">{t("home.open")}</span>
-               <div className="w-4 h-4 bg-black rounded-full animate-pulse"></div>
-            </div>
-          </Link>
-        ))}
-
-        <div className={`${cardClass} bg-[#ff00ff] ${isDark ? 'bg-purple-900 border-white shadow-[10px_10px_0px_0px_rgba(255,255,255,1)]' : ''} flex items-center justify-center overflow-hidden relative cursor-default`}>
-           <div className="text-center font-black text-4xl transform -rotate-12 relative z-10 leading-tight">
-             {t("home.filler").split("\n").map((line: string, i: number) => <span key={i}>{line}<br/></span>)}
-           </div>
-           <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-[radial-gradient(circle,rgba(0,0,0,1)_1px,transparent_1px)] bg-[size:10px_10px]"></div>
+    <div className="min-h-full p-6 md:p-10">
+      <div className="max-w-7xl mx-auto">
+        {/* System status bar */}
+        <div className="flex items-center gap-4 mb-8 font-mono text-xs text-crt-text-dim">
+          <span className="text-crt-green glow-green">$</span>
+          <span>ls ./modules/</span>
+          <span className="text-crt-text-dim">— {modules.length} modules loaded, response time: 10s avg</span>
         </div>
 
+        {/* Module grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {modules.map((mod, i) => (
+            <Link key={mod.href} href={mod.href} className={`terminal-card slow-fade stagger-${i + 1}`}>
+              <div className="terminal-card-content p-6 flex flex-col gap-3 min-h-[180px]">
+                {/* Module number */}
+                <div className="text-crt-text-dim font-mono text-[10px] tracking-widest">
+                  MODULE_{mod.icon}
+                </div>
+
+                {/* Module title */}
+                <h3 className="text-2xl font-display text-crt-green glow-green leading-tight">
+                  {t(mod.titleKey)}
+                </h3>
+
+                {/* Module description */}
+                <p className="font-mono text-xs text-crt-text-dim leading-relaxed flex-grow">
+                  {t(mod.descKey)}
+                </p>
+
+                {/* Action label */}
+                <div className="flex items-center justify-between mt-2 pt-3 border-t border-crt-border">
+                  <span className="text-crt-green font-mono text-[10px] tracking-widest uppercase group-hover:glow-green transition-all">
+                    {t("home.open")}
+                  </span>
+                  <div className="w-1.5 h-1.5 rounded-full bg-crt-green opacity-50" />
+                </div>
+              </div>
+            </Link>
+          ))}
+
+          {/* Filler card */}
+          <div className="terminal-card slow-fade stagger-9 relative overflow-hidden">
+            <div className="terminal-card-content p-6 flex items-center justify-center min-h-[180px]">
+              <div className="text-center">
+                <div className="text-3xl font-display text-crt-amber glow-amber leading-tight tracking-widest">
+                  {t("home.filler").split("\n").map((line: string, j: number) => (
+                    <span key={j}>
+                      {line}
+                      {j < t("home.filler").split("\n").length - 1 && <br />}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              {/* Decorative scan line */}
+              <div className="absolute inset-0 pointer-events-none opacity-10">
+                <div className="w-full h-px bg-crt-amber absolute top-1/2 animate-pulse" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Footer status */}
+        <div className="mt-12 pt-6 border-t border-crt-border font-mono text-[10px] text-crt-text-dim text-center">
+          AI SLOPS v0.1.0 — all operations guaranteed to be slow — no refunds
+        </div>
       </div>
     </div>
   );

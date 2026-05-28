@@ -23,44 +23,55 @@ export default function ConverterPage() {
   };
 
   return (
-    <div className={`min-h-full p-8 ${isDark ? 'bg-zinc-950' : 'bg-[#f4f4f0]'} flex flex-col items-center gap-8`}>
-      <div className="w-full max-w-7xl">
-        <Link href="/" className="inline-block border-8 border-black p-4 bg-[#ffea00] text-black font-black uppercase hover:bg-black hover:text-white transition-colors shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] cursor-pointer">
-          {t("back")}
+    <div className="min-h-full p-6 md:p-10">
+      <div className="max-w-7xl mx-auto">
+        <Link href="/" className="inline-flex items-center gap-2 font-mono text-xs text-crt-text-dim hover:text-crt-green transition-colors mb-8 group">
+          <span className="text-crt-green opacity-50 group-hover:opacity-100 transition-opacity">$</span>
+          <span>{t("back")}</span>
         </Link>
-      </div>
 
-      <div className="flex flex-col md:row gap-12 items-start w-full max-w-5xl">
-        <div className={`border-8 ${isDark ? 'border-white bg-zinc-800' : 'border-black bg-white'} p-8 shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] w-full md:w-[600px]`}>
-          <h2 className="text-3xl font-black uppercase mb-6">{t("converter.title")}</h2>
-          <div className="flex gap-4 mb-6">
-            <div className="flex-grow">
-              <label className="block font-black uppercase text-xs mb-2">{t("converter.labelFrom")}</label>
-              <input 
-                type="number"
-                value={meters} 
-                onChange={(e) => setMeters(e.target.value)}
-                className={`w-full p-4 border-4 border-black font-mono focus:ring-8 focus:ring-green-500 outline-none ${isDark ? 'bg-zinc-900 text-white border-white' : 'bg-gray-50 text-black'}`}
-                placeholder={t("converter.placeholder")}
-              />
-            </div>
-            <div className="flex items-end pb-4 font-black text-2xl">→</div>
-            <div className="flex-grow">
-              <label className="block font-black uppercase text-xs mb-2">{t("converter.labelTo")}</label>
-              <div className={`w-full p-4 border-4 border-black font-mono h-[60px] flex items-center ${isDark ? 'bg-zinc-900/50 border-white opacity-50' : 'bg-gray-200 border-black opacity-50'}`}>
-                {meters ? parseFloat(meters) * 100 : "?"}
+        <div className="flex flex-col lg:flex-row gap-8 items-start">
+          <div className="terminal-card w-full lg:w-[600px]">
+            <div className="terminal-card-content p-6">
+              <h2 className="text-3xl font-display text-crt-green glow-green mb-6">
+                {t("converter.title")}
+              </h2>
+
+              <div className="flex gap-4 mb-5">
+                <div className="flex-grow">
+                  <label className="block font-mono text-xs text-crt-text-dim mb-2 uppercase">
+                    {t("converter.labelFrom")}
+                  </label>
+                  <input
+                    type="number"
+                    value={meters}
+                    onChange={(e) => setMeters(e.target.value)}
+                    className="crt-input w-full p-4 font-mono text-sm"
+                    placeholder={t("converter.placeholder")}
+                  />
+                </div>
+                <div className="flex items-end pb-4 font-display text-2xl text-crt-amber glow-amber">→</div>
+                <div className="flex-grow">
+                  <label className="block font-mono text-xs text-crt-text-dim mb-2 uppercase">
+                    {t("converter.labelTo")}
+                  </label>
+                  <div className="w-full p-4 border border-crt-border font-mono text-sm h-[54px] flex items-center bg-crt-bg/50 text-crt-text-dim">
+                    {meters ? parseFloat(meters) * 100 : "?"}
+                  </div>
+                </div>
               </div>
+
+              <button
+                onClick={handleConvert}
+                className="crt-btn w-full py-3 font-mono text-sm"
+              >
+                {t("converter.button")}
+              </button>
             </div>
           </div>
-          <button 
-            onClick={handleConvert}
-            className={`w-full py-4 border-4 border-black font-black uppercase tracking-widest transition-all hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] ${isDark ? 'bg-white text-black' : 'bg-black text-white'}`}
-          >
-            {t("converter.button")}
-          </button>
-        </div>
 
-        <SlopPanel slop={slop} loading={loading} />
+          <SlopPanel slop={slop} loading={loading} />
+        </div>
       </div>
     </div>
   );

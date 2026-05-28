@@ -9,26 +9,39 @@ export default function Header() {
   const { locale, setLocale, t } = useLang();
 
   return (
-    <header className={`border-b-8 ${isDark ? 'border-white bg-[#332f00]' : 'border-black bg-[#ffea00]'} p-6 flex justify-between items-end relative overflow-hidden`}>
-      <Link href="/" className="relative z-10 group cursor-pointer">
-        <h1 className="text-5xl md:text-7xl font-black tracking-tighter">
-          AI <span className="text-white drop-shadow-[4px_4px_0px_rgba(0,0,0,1)]">SLOPS</span>
-        </h1>
-        <p className="font-mono mt-2 font-bold text-lg bg-black text-white inline-block px-2 py-1 uppercase transform -rotate-2 group-hover:rotate-0 transition-transform">
-          {t("header.tagline")}
-        </p>
-      </Link>
-      <div className="relative z-10 flex items-center gap-3">
-        <button
-          onClick={() => setLocale(locale === "en" ? "tr" : "en")}
-          className={`font-black uppercase text-sm border-4 px-3 py-1 transition-all hover:-translate-y-0.5 ${isDark ? 'border-white text-white hover:bg-white hover:text-black' : 'border-black text-black hover:bg-black hover:text-white'}`}
-        >
-          {locale === "en" ? "TR" : "EN"}
-        </button>
+    <header className="relative z-10 border-b border-crt-border bg-crt-surface/80 backdrop-blur-sm">
+      <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+        <Link href="/" className="group flex items-center gap-4 cursor-pointer">
+          {/* Terminal prompt icon */}
+          <div className="text-crt-green text-3xl font-display glow-green group-hover:opacity-100 opacity-70 transition-opacity">
+            &gt;_
+          </div>
+          <div>
+            <h1 className="text-4xl md:text-5xl font-display text-crt-green glow-green leading-none tracking-wider">
+              AI SLOPS
+            </h1>
+            <p className="font-mono text-xs text-crt-text-dim mt-1 tracking-widest uppercase">
+              {t("header.tagline")}
+            </p>
+          </div>
+        </Link>
+
+        <div className="flex items-center gap-4">
+          {/* Status indicator */}
+          <div className="hidden md:flex items-center gap-2 text-crt-text-dim font-mono text-xs">
+            <div className="w-2 h-2 rounded-full bg-crt-green animate-pulse" />
+            <span>SYSTEM: SLOW</span>
+          </div>
+
+          {/* Language toggle */}
+          <button
+            onClick={() => setLocale(locale === "en" ? "tr" : "en")}
+            className="crt-btn px-3 py-1.5 text-xs font-mono"
+          >
+            {locale === "en" ? "TR" : "EN"}
+          </button>
+        </div>
       </div>
-      <h2 className="hidden md:block text-[10rem] font-black opacity-10 tracking-widest absolute right-0 -bottom-12 pointer-events-none">
-        SLOPS
-      </h2>
     </header>
   );
 }
