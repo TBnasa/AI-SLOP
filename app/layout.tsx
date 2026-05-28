@@ -9,8 +9,8 @@ const bebas = Bebas_Neue({ weight: "400", subsets: ["latin"], variable: "--font-
 const jetbrains = JetBrains_Mono({ weight: ["400", "600", "700"], subsets: ["latin"], variable: "--font-jetbrains" });
 
 export const metadata: Metadata = {
-  title: "AI SLOPS - everything is very slow",
-  description: "The platform that makes even the simplest things slow.",
+  title: "AI SLOPS",
+  description: "The platform that takes its time.",
 };
 
 export default function RootLayout({

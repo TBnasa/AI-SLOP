@@ -15,20 +15,17 @@ export default function Header() {
 
       {/* Marquee ticker */}
       <div className="bg-black text-white overflow-hidden py-1.5 border-b-[3px] border-black">
-        <div className="marquee whitespace-nowrap font-mono text-[10px] uppercase tracking-widest">
-          <span className="inline-block px-6 clr-red">SLOW</span>
-          <span className="inline-block px-6 clr-yellow">USELESS</span>
-          <span className="inline-block px-6 clr-green">BROKEN</span>
-          <span className="inline-block px-6 clr-blue">AI POWERED</span>
-          <span className="inline-block px-6 clr-orange">10 SEC DELAY</span>
-          <span className="inline-block px-6 clr-purple">NO REFUNDS</span>
-          <span className="inline-block px-6 clr-red">SLOW</span>
-          <span className="inline-block px-6 clr-yellow">USELESS</span>
-          <span className="inline-block px-6 clr-green">BROKEN</span>
-          <span className="inline-block px-6 clr-blue">AI POWERED</span>
-          <span className="inline-block px-6 clr-orange">10 SEC DELAY</span>
-          <span className="inline-block px-6 clr-purple">NO REFUNDS</span>
-        </div>
+         <div className="marquee whitespace-nowrap font-mono text-[10px] uppercase tracking-widest">
+           <span className="inline-block px-6 clr-yellow">USELESS</span>
+           <span className="inline-block px-6 clr-green">BROKEN</span>
+           <span className="inline-block px-6 clr-blue">AI POWERED</span>
+           <span className="inline-block px-6 clr-purple">NO REFUNDS</span>
+           <span className="inline-block px-6 clr-yellow">USELESS</span>
+           <span className="inline-block px-6 clr-green">BROKEN</span>
+           <span className="inline-block px-6 clr-blue">AI POWERED</span>
+           <span className="inline-block px-6 clr-purple">NO REFUNDS</span>
+         </div>
+
       </div>
 
       <div className="max-w-7xl mx-auto px-6 py-6 flex items-end justify-between">
@@ -46,7 +43,7 @@ export default function Header() {
         <div className="flex items-end gap-4 pb-3">
           <div className="hidden md:flex items-center gap-2 border-[3px] border-black px-3 py-2">
             <div className="w-2 h-2 bg-green animate-pulse" />
-            <span className="font-mono text-[10px] uppercase">STATUS: SLOW</span>
+            <span className="font-mono text-[10px] uppercase">STATUS: OK</span>
           </div>
 
           <button

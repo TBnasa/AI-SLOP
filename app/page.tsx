@@ -116,7 +116,8 @@ export default function Home() {
             <div className="w-2 h-2 bg-[#ff6600]" />
             <div className="w-2 h-2 bg-[#9900ff]" />
           </div>
-          <span>ALL OPERATIONS GUARANTEED TO BE SLOW</span>
+           <span>ALL OPERATIONS GUARANTEED TO BE SLOPPY</span>
+
         </div>
       </div>
     </div>
